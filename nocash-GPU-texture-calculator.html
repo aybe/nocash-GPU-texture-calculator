@@ -1,0 +1,105 @@
+<html>
+
+  <head>
+    <script>
+      document.addEventListener("DOMContentLoaded", function(event) {
+        cvtTP(document.getElementById("tp").placeholder);
+        cvtTC(document.getElementById("tc").placeholder);
+        cvtTW(document.getElementById("tw").placeholder);
+      });
+
+      function bitVector(val, bit, max) {
+        return (val >> bit) & max;
+      }
+
+      function cvtTC(input) {
+        var value = parseInt(input, 16);
+        if (isNaN(value))
+          value = 0x0000;
+        document.getElementById("tcx").value = bitVector(value, 0, 0x3F) * 16;
+        document.getElementById("tcy").value = bitVector(value, 6, 0x1FF);
+      }
+
+      function cvtTP(input) {
+        var value = parseInt(input, 16);
+        if (isNaN(value))
+          value = 0x0000;
+        document.getElementById("tpx").value = bitVector(value, 0, 0xF) * 64;
+        document.getElementById("tpy").value = bitVector(value, 4, 0x1) * 256;
+      }
+
+      function cvtTW(input) {
+        var value = parseInt(input, 16);
+        if (isNaN(value))
+          value = 0x00000000;
+        document.getElementById("twmx").value = bitVector(value, 0, 0x1F) * 8;
+        document.getElementById("twmy").value = bitVector(value, 5, 0x1F) * 8;
+        document.getElementById("twox").value = bitVector(value, 10, 0x1F) * 8;
+        document.getElementById("twoy").value = bitVector(value, 15, 0x1F) * 8;
+      }
+
+    </script>
+  </head>
+
+  <body>
+    <table>
+
+      <tr>
+        <td>Texture CLUT:</td>
+        <td><input id="tc" type="text" placeholder="0x3CBC" oninput="cvtTC(this.value)" onchange="cvtTC(this.value)"></td>
+      </tr>
+      <tr>
+        <td>Texture CLUT X:</td>
+        <td><input id="tcx" readonly></td>
+      </tr>
+      <tr>
+        <td>Texture CLUT Y:</td>
+        <td><input id="tcy" readonly></td>
+      </tr>
+
+      <tr>
+      <tr>
+      <tr>
+
+      <tr>
+        <td>Texture Page:</td>
+        <td><input id="tp" type="text" placeholder="0x001B" oninput="cvtTP(this.value)" onchange="cvtTP(this.value)"></td>
+      </tr>
+      <tr>
+        <td>Texture Page X:</td>
+        <td><input id="tpx" readonly></td>
+      </tr>
+      <tr>
+        <td>Texture Page Y:</td>
+        <td><input id="tpy" readonly></td>
+      </tr>
+
+      <tr>
+      <tr>
+      <tr>
+
+      <tr>
+        <td>Texture Window:</td>
+        <td><input id="tw" type="text" placeholder="0xE2006318" oninput="cvtTW(this.value)" onchange="cvtTW(this.value)"></td>
+      </tr>
+      <tr>
+        <td>Texture Window Mask X:</td>
+        <td><input id="twmx" readonly></td>
+      </tr>
+      <tr>
+        <td>Texture Window Mask Y:</td>
+        <td><input id="twmy" readonly></td>
+      </tr>
+      <tr>
+        <td>Texture Window Offset X:</td>
+        <td><input id="twox" readonly></td>
+      </tr>
+      <tr>
+        <td>Texture Window Offset Y:</td>
+        <td><input id="twoy" readonly></td>
+      </tr>
+
+    </table>
+  </body>
+
+</html>
